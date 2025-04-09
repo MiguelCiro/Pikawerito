@@ -53,6 +53,11 @@
             
             let mensaje = "¡Hola! Quiero pedir:\n";
             let total = 0;
+
+            cart.forEach(item => {
+            mensaje += `- ${item.product} - $${item.price} COP\n`;
+            total += item.price;
+            });
             
             const numero = "+573107249827"; 
             const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
