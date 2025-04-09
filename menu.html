@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pikawerito Menu</title> <link rel="stylesheet" href="Menu.css">
+    <link rel="icon" href="IMAGENES/favicon.png" type="image/png">
+</head>
+<body>
+    <header>
+        <h1>¡Pikawerito!</h1>
+        <p>¡Dulce, Picoso y Delicioso!</p>
+        <button class="cta-button" onclick="document.getElementById('productos').scrollIntoView({behavior:'smooth'})" href="https://wa.me/+573107249827">¡Quiero mis gomitas!</button>
+    </header>
+
+    <section>
+        <div class="gomitas">
+            <h2>Gomitas Deliciosas</h2>
+        </div>
+    </section>
+    
+
+    <section class="section-05" id="menu-productos">
+        <h2>Escoge El Que Más Te Guste 😋</h2>
+        <div class="products">
+            <nav>
+                <a href="gusanitos.html">Gusanitos</a>
+                <a href="aritos.html">Aritos</a>
+                <a href="mix.html">Combos Mix</a>
+            </nav>
+        </div>
+    </section>
+    
+    <section class="section cart">
+        <button class="checkout-button" onclick="checkout()">Finalizar pedido por WhatsApp</button>
+    </section>
+    
+    <footer> © 2025 Pikawerito. Todos los derechos reservados.</footer>
+
+    <script>
+        function renderCart() {
+        const list = document.getElementById('cart-list');
+        const total = document.getElementById('total');
+        list.innerHTML = '';
+        let sum = 0;
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+            alert("Agrega al menos un producto al carrito.");
+            return;
+            }
+            
+            let mensaje = "¡Hola! Quiero pedir:\n";
+            let total = 0;
+            
+            const numero = "+573107249827"; 
+            const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+            
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
