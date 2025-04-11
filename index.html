@@ -38,13 +38,13 @@
             <img src="#" alt="Gusanitos">
             <h3>Gusanitos en Chamoy</h3>
             <p>Paquete 30Unds- $9.000 COP</p>
-            <button class="add-button" onclick="addToCart('Gusanitos en Chamoy', 9000)">Agregar</button>
+            <button class="add-button" onclick="agregarAlCarrito('Gusanitos en Chamoy', 9000)">Agregar</button>
         </div>
         <div class="product-card">
             <img src="#" alt="Aritos">
             <h3>Mix Picosito</h3>
             <p>Paquete 20Unds- $7.000 COP</p>
-            <button class="add-button" onclick="addToCart('Aritos Picositos', 7000)">Agregar</button>
+            <button class="add-button" onclick="agregarAlCarrito('Aritos Picositos', 7000)">Agregar</button>
         </div>
     </div>
 </section>
@@ -61,51 +61,88 @@
 </footer>
 
 <script>
-const cart = [];
+    // Cargar carrito desde localStorage o iniciar vacío
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-function addToCart(product, price) {
-    cart.push({ product, price });
+    // Guardar carrito
+    function guardarCarrito() {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    }
+
+    // Agregar producto al carrito
+    function agregarAlCarrito(nombre, precio) {
+    carrito.push({ nombre, precio });
+    guardarCarrito();
     renderCart();
+    actualizarContadorCarrito();
+    alert(`${nombre} agregado al carrito`);
     }
 
-function renderCart() {
-    const list = document.getElementById('cart-list');
-    const total = document.getElementById('total');
-    list.innerHTML = '';
-    let sum = 0;
-
-    cart.forEach((item, index) => {
-        sum += item.price;
-        const li = document.createElement('li');
-        li.textContent = `${item.product} - $${item.price}`;
-        list.appendChild(li);
-    });
-
-    total.textContent = sum;
-}
-
-function checkout() {
-    if (cart.length === 0) {
-        alert("Agrega al menos un producto al carrito.");
-        return;
+    // Eliminar producto por índice
+    function eliminarDelCarrito(index) {
+    carrito.splice(index, 1);
+    guardarCarrito();
+    renderCart();
+    actualizarContadorCarrito();
     }
 
-    let mensaje = "¡Hola! Quiero pedir:\n";
+    // Mostrar productos del carrito
+    function renderCart() {
+    const lista = document.getElementById("cart-list");
+    const totalElemento = document.getElementById("total");
+    if (!lista || !totalElemento) return;
+
+    lista.innerHTML = "";
     let total = 0;
 
-    cart.forEach(item => {
-    mensaje += `- ${item.product} - $${item.price} COP\n`;
-    total += item.price;
+    carrito.forEach((item, index) => {
+    total += item.precio;
+
+    const li = document.createElement("li");
+    li.innerHTML = `
+    ${item.nombre} - $${item.precio.toLocaleString()} COP
+    <button onclick="eliminarDelCarrito(${index})">❌</button>
+    `;
+    lista.appendChild(li);
     });
 
-    mensaje += `Total: $${total} COP`;
+    totalElemento.textContent = total.toLocaleString();
+    }
 
-    const numero = "+573107249827"; 
+    // Enviar pedido por WhatsApp
+    function checkout() {
+    if (carrito.length === 0) {
+    alert("El carrito está vacío.");
+    return;
+    }
+
+    let mensaje = "Hola, quiero pedir:\n";
+    let total = 0;
+
+    carrito.forEach(item => {
+    mensaje += `- ${item.nombre} - $${item.precio.toLocaleString()} COP\n`;
+    total += item.precio;
+    });
+
+    mensaje += `\nTotal: $${total.toLocaleString()} COP`;
+
+    const numero = "573107249827";
     const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, "_blank");
+    }
+    // Mostrar cantidad de productos en el icono del carrito
+    function actualizarContadorCarrito() {
+    const contador = document.getElementById("contador-carrito");
+    if (contador) {
+        contador.textContent = carrito.length;
+    }
+    }
 
-    window.open(url, '_blank');
-}
+    // Al cargar la página
+    document.addEventListener("DOMContentLoaded", () => {
+    renderCart();
+    actualizarContadorCarrito();
+    });
 </script>
-
 </body>
 </html>
