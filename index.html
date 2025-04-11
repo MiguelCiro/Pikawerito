@@ -24,9 +24,9 @@
     <h2>Contáctanos</h2>
     <div class="contact">
         <nav>
-            <a href="https://wa.me/+573107249827">📱 WhatsApp: Enviar Mensaje</a>
-            <a href="https://www.instagram.com/pikawerito">📸 Instagram: @pikawerito</a>
-            <a href="menu.html">🛒 Catalogo: Comprar Ahora!</a>
+            <a href="https://wa.me/+573107249827" class="menu-button">📱 WhatsApp: Enviar Mensaje</a>
+            <a href="https://www.instagram.com/pikawerito" class="menu-button">📸 Instagram: @pikawerito</a>
+            <a href="menu.html" class="menu-button">🛒 Catalogo: Comprar Ahora!</a>
         </nav>
     </div>
 </section>
@@ -35,13 +35,13 @@
     <h2>Productos Destacados</h2>
     <div class="products">
         <div class="product-card">
-            <img src="#" alt="Gusanitos">
+            <img src="imagenes/gusanitos.jpg" alt="Gusanitos">
             <h3>Gusanitos en Chamoy</h3>
             <p>Paquete 30Unds- $9.000 COP</p>
             <button class="add-button" onclick="agregarAlCarrito('Gusanitos en Chamoy', 9000)">Agregar</button>
         </div>
         <div class="product-card">
-            <img src="#" alt="Aritos">
+            <img src="imagenes/mix-02.jpg" alt="Aritos">
             <h3>Mix Picosito</h3>
             <p>Paquete 20Unds- $7.000 COP</p>
             <button class="add-button" onclick="agregarAlCarrito('Aritos Picositos', 7000)">Agregar</button>
@@ -126,7 +126,7 @@
 
     mensaje += `\nTotal: $${total.toLocaleString()} COP`;
 
-    const numero = "573107249827";
+    const numero = "573166011546";
     const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
     window.open(url, "_blank");
     }
