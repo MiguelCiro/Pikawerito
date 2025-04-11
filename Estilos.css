@@ -11,12 +11,11 @@ body {
 }
 
 header {
-    background: linear-gradient(to right, #ff5e5e, #ffb347);
     color: white;
     padding: 2rem 1rem;
     text-align: center;
     background-image: 
-    url(imagenes/favicon.png);
+    url(favicon.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
