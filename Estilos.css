@@ -58,6 +58,23 @@ header p {
     transition: 0.3s;
 }
 
+.menu-button {
+    background-color: white;
+    color: #ff5e5e; /* el color del texto */
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.menu-button:hover {
+    background-color: #ffeaea;
+    transform: scale(1.05);
+}
+
 .contactos {
     padding: 2rem 1rem;
 }
