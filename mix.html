@@ -22,20 +22,18 @@
     <section class="section-04" id="productos">
         <h2>Nuestros Productos 😋</h2>
         <div class="products">
-            <div class="product-card" data-id="mix10" data-stock="3">
+            <div class="product-card">
                 <img src="mix-01.jpg" alt="Gusanitos 10Unds">
                 <h3>Mix Picosito</h3>
                 <p>Combo Aritos y Gusanitos 10Unds - $5,500 COP</p>
                 <button class="add-button" onclick="agregarAlCarrito('Mix Picosito 10Unds', 5500)">Agregar></button>
-                 <span class="agotado oculto">Agotado</span>
             </div>
             
-            <div class="product-card" data-id="mix15" data-stock="2">
+            <div class="product-card">
                 <img src="mix-03.jpg" alt="Gusanitos 15Unds">
                 <h3>Mix Picosito</h3>
                 <p>Combo Aritos y Gusanitos 15Unds - $7,000 COP</p>
                 <button class="add-button" onclick="agregarAlCarrito('Mix Picosito 15Unds', 7000)">Agregar></button>
-                 <span class="agotado oculto">Agotado</span>
             </div>
         </div>
     </section>
@@ -134,39 +132,6 @@
         renderCart();
         actualizarContadorCarrito();
         });
-
-        // 🧃 Guardar y cargar stock
-        function guardarStock() {
-        const stock = {};
-        document.querySelectorAll('.product-card').forEach(card => {
-        const id = card.dataset.id;
-        const s = card.dataset.stock;
-        stock[id] = s;
-        });
-        localStorage.setItem("stock", JSON.stringify(stock));
-        }
-
-        function cargarStock() {
-        const stockGuardado = JSON.parse(localStorage.getItem("stock")) || {};
-        document.querySelectorAll('.product-card').forEach(card => {
-        const id = card.dataset.id;
-        if (stockGuardado[id] !== undefined) {
-        card.dataset.stock = stockGuardado[id];
-        if (parseInt(stockGuardado[id]) === 0) {
-        marcarAgotado(card);
-        }
-        }
-        });
-        }
-
-       // 🧃 Marcar como agotado
-       function marcarAgotado(card) {
-       const boton = card.querySelector('.add-button');
-       const agotado = card.querySelector('.agotado');
-       boton.disabled = true;
-       boton.textContent = "Agotado";
-       agotado.classList.remove('oculto');
-       }
     </script>
 </body>
 </html>
