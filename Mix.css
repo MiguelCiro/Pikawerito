@@ -162,6 +162,12 @@ button.eliminar-btn:hover {
   font-size: 18px;
   color: #555;
   box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 200px; 
+  flex-direction: column;
 }
 
 
