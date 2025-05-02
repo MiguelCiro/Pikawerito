@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gomitas 😋</title> <link rel="stylesheet" href="frutas.css">
+    <link rel="icon" href="imagenes/logo.jpg" type="image/png">
+</head>
+<body>
+    <header>
+        <h1>¡Pikawerito!</h1>
+        <p>¡Dulce,Picoso y Delicioso!</p>
+        <div class="gomitas">
+            <h2>Gomitas Deliciosas</h2>
+        </div>
+    </header>
+
+    <section class="section-02" id="productos">
+        <h2>Nuestros Productos 😋</h2>
+        <div class="products">
+            <!--
+            <div class="agotado-box">
+                <p>Agotado Temporalmente 😓<br>Gracias por tu comprensión.<br><strong>Visita los otros productos y selecciona uno de ellos 🛍️</strong></p>
+            </div>
+            !-->
+
+            <div class="product-card">
+                <img src="mango.jpg" alt="Mango">
+                <h3>Pikamanguito</h3>
+                <p>Manguito y Gomitas - $5,000 COP</p>
+                <button class="add-button" onclick="agregarAlCarrito('Pikamanguito', 5000)">Agregar</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section cart">
+        <h2>🛒 Carrito</h2>
+        <ul id="cart-list"></ul>
+        <p><strong>Total: $<span id="total">0</span> COP</strong></p>
+        <button class="checkout-button" onclick="checkout()">Finalizar pedido por WhatsApp <br> (Domicilios a todo Bello)</button>
+    </section>
+
+    <footer>
+        © 2025 Pikawerito.
+    </footer>
+    
+    <script>
+        // Cargar carrito desde localStorage o iniciar vacío
+        let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+        // Guardar carrito
+        function guardarCarrito() {
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+        }
+
+        // Agregar producto al carrito
+        function agregarAlCarrito(nombre, precio) {
+        carrito.push({ nombre, precio });
+        guardarCarrito();
+        renderCart();
+        actualizarContadorCarrito();
+        alert(`${nombre} agregado al carrito`);
+        }
+    
+        // Eliminar producto por índice
+        function eliminarDelCarrito(index) {
+        carrito.splice(index, 1);
+        guardarCarrito();
+        renderCart();
+        actualizarContadorCarrito();
+        }
+
+        // Mostrar productos del carrito
+        function renderCart() {
+        const lista = document.getElementById("cart-list");
+        const totalElemento = document.getElementById("total");
+        if (!lista || !totalElemento) return;
+    
+        lista.innerHTML = "";
+        let total = 0;
+
+        carrito.forEach((item, index) => {
+        total += item.precio;
+
+        const li = document.createElement("li");
+        li.innerHTML = `
+        ${item.nombre} - $${item.precio.toLocaleString()} COP
+        <button onclick="eliminarDelCarrito(${index})">❌</button>
+        `;
+        lista.appendChild(li);
+        });
+    
+        totalElemento.textContent = total.toLocaleString();
+        }
+
+        // Enviar pedido por WhatsApp
+        function checkout() {
+        if (carrito.length === 0) {
+        alert("El carrito está vacío.");
+        return;
+        }
+
+        let mensaje = "Hola, quiero pedir:\n";
+        let total = 0;
+
+        carrito.forEach(item => {
+        mensaje += `- ${item.nombre} - $${item.precio.toLocaleString()} COP\n`;
+        total += item.precio;
+        });
+
+        mensaje += `\nTotal: $${total.toLocaleString()} COP`;
+
+        const numero = "573166011546";
+        const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+        window.open(url, "_blank");
+        }
+        // Mostrar cantidad de productos en el icono del carrito
+        function actualizarContadorCarrito() {
+        const contador = document.getElementById("contador-carrito");
+        if (contador) {
+            contador.textContent = carrito.length;
+        }
+        }
+
+        // Al cargar la página
+        document.addEventListener("DOMContentLoaded", () => {
+        renderCart();
+        actualizarContadorCarrito();
+        });
+    </script>
+</body>
+</html>
