@@ -78,7 +78,7 @@ header p {
 .menu-button-promos {
     background-image: url(promo.jpg);
     background-color: #fff;
-    color: #ff5e5e;
+    color: white;
     padding: 0.8rem 1.5rem;
     border: none;
     border-radius: 25px;
@@ -90,7 +90,7 @@ header p {
 
 .menu-button-promos {
     background-color: white;
-    color: #ff5e5e; /* el color del texto */
+    color: white; /* el color del texto */
     border: none;
     border-radius: 30px;
     padding: 10px 20px;
